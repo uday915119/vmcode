@@ -4,6 +4,11 @@ variable "rg" {
   default     = "uday-rg"
 
 }
+variable "rg1" {
+  description = "Name of the resource group"
+  type        = string
+  default     = "uday-rg1"
+}
 variable "location" {
   description = "Azure region for the resources"
   type        = string
