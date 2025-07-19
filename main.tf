@@ -122,17 +122,13 @@ output "vm_public_ip" {
 
 resource "azurerm_virtual_machine_extension" "nginx" {
   name                 = "nginx-install"
-  virtual_machine_id   = azurerm_linux_virtual_machine.vm.id # replace with your actual VM resource name
-  publisher           = "Microsoft.Azure.Extensions"
-  type                = "CustomScript"
+  virtual_machine_id   = azurerm_linux_virtual_machine.vm.id
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
   type_handler_version = "2.1"
-  auto_upgrade_minor_version = true
 
-  settings = <<SETTINGS
-    {
-      "commandToExecute": "sudo apt-get update && sudo apt-get install -y nginx"
-    }
-SETTINGS
+  settings = jsonencode({
+    commandToExecute = "sudo apt-get update && sudo apt-get install -y nginx"
+  })
 }
-
 
